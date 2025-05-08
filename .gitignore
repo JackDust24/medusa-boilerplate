@@ -1,0 +1,9 @@
+/hawk-store/node_modules
+/hawk-store/.env
+/hawk-store/.env.local
+
+/hawk-store-storefront/node_modules/
+/hawk-store-storefront/.next/
+/hawk-store-storefront/.yarn
+/hawk-store-storefront/.yarn
+/hawk-store-storefront/out/
