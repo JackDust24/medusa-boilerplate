@@ -13,6 +13,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
       ...req.queryConfig,
     });
 
+  console.log('GET /admin/brands BRANDS - ', brands);
   res.json({
     brands,
     count,

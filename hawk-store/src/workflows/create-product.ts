@@ -18,88 +18,88 @@ type CreateProductInput = {
       [key: string]: string;
     };
   }[];
-  // shipping_profile_id?: string;
-  additional_data?: {
-    brand_id?: string;
-  };
+  shipping_profile_id?: string;
+  // additional_data?: {
+  //   brand_id?: string;
+  // };
 };
 
-// const createProductStep = createStep(
-//   'create-product',
-//   async (inputData: CreateProductInput, { container }) => {
-//     const productService = container.resolve(Modules.PRODUCT);
+const createProductStep = createStep(
+  'create-product',
+  async (inputData: CreateProductInput, { container }) => {
+    const productService = container.resolve(Modules.PRODUCT);
 
-//     const product = await productService.createProducts({
-//       title: inputData.title,
-//       options: inputData.options,
-//       variants: inputData.variants || [],
-//       //   shipping_profile_id: inputData.shipping_profile_id,
-//       additional_data: {
-//         brand_id: inputData.additional_data?.brand_id,
-//       },
-//     });
+    const product = await productService.createProducts({
+      title: inputData.title,
+      options: inputData.options,
+      variants: inputData.variants || [],
+      shipping_profile_id: inputData.shipping_profile_id,
+      // additional_data: {
+      //   brand_id: inputData.additional_data?.brand_id,
+      // },
+    });
 
-//     return new StepResponse({ product }, product.id);
-//   },
-//   async (productId, { container }) => {
-//     if (!productId) return;
-//     const productService = container.resolve(Modules.PRODUCT);
-//     await productService.deleteProducts([productId]);
-//   }
-// );
+    return new StepResponse({ product }, product.id);
+  },
+  async (productId, { container }) => {
+    if (!productId) return;
+    const productService = container.resolve(Modules.PRODUCT);
+    await productService.deleteProducts([productId]);
+  }
+);
 
-// export const createProductWorkflow = createWorkflow(
-//   'create-product',
-//   (input: CreateProductInput) => {
-//     const { product } = createProductStep(input);
-//     return new WorkflowResponse({ product });
-//   }
-// );
+export const createProductWorkflow = createWorkflow(
+  'create-product',
+  (input: CreateProductInput) => {
+    const { product } = createProductStep(input);
+    return new WorkflowResponse({ product });
+  }
+);
 
 // export const createProductWorkflow = createWorkflow('create-product', () => {
 //   const { product } = createProductStep();
 //   return new WorkflowResponse({ product });
 // });
 
-const createProductStep = createStep(
-  'create-product',
-  async ({}, { container }) => {
-    const productService = container.resolve(Modules.PRODUCT);
+// const createProductStep = createStep(
+//   'create-product',
+//   async ({}, { container }) => {
+//     const productService = container.resolve(Modules.PRODUCT);
 
-    const product = await productService.createProducts({
-      title: 'Medusa Shirt',
-      options: [
-        {
-          title: 'Color',
-          values: ['Black', 'White'],
-        },
-      ],
-      variants: [
-        {
-          title: 'Black Shirt',
-          options: {
-            Color: 'Black',
-          },
-        },
-      ],
-    });
+//     const product = await productService.createProducts({
+//       title: 'Medusa Shirt',
+//       options: [
+//         {
+//           title: 'Color',
+//           values: ['Black', 'White'],
+//         },
+//       ],
+//       variants: [
+//         {
+//           title: 'Black Shirt',
+//           options: {
+//             Color: 'Black',
+//           },
+//         },
+//       ],
+//     });
 
-    return new StepResponse({ product }, product.id);
-  },
-  async (productId, { container }) => {
-    if (!productId) {
-      return;
-    }
-    const productService = container.resolve(Modules.PRODUCT);
+//     return new StepResponse({ product }, product.id);
+//   },
+//   async (productId, { container }) => {
+//     if (!productId) {
+//       return;
+//     }
+//     const productService = container.resolve(Modules.PRODUCT);
 
-    await productService.deleteProducts([productId]);
-  }
-);
+//     await productService.deleteProducts([productId]);
+//   }
+// );
 
-export const createProductWorkflow = createWorkflow('create-product', () => {
-  const { product } = createProductStep();
+// export const createProductWorkflow = createWorkflow('create-product', () => {
+//   const { product } = createProductStep();
 
-  return new WorkflowResponse({
-    product,
-  });
-});
+//   return new WorkflowResponse({
+//     product,
+//   });
+// });
