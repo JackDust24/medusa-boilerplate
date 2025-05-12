@@ -17,5 +17,11 @@ module.exports = defineConfig({
     {
       resolve: './src/modules/brand',
     },
+    {
+      resolve: './src/modules/erp',
+      options: {
+        baseUrl: 'http://localhost:4001',
+      },
+    },
   ],
 });

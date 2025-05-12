@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { MedusaRequest, MedusaResponse } from '@medusajs/framework/http';
 import { createBrandWorkflow } from '../../../workflows/create-brand';
 // import { PostAdminCreateBrand } from './validators';
-import { createProductWorkflow } from '../../../workflows/create-product';
+// import { createProductWorkflow } from '../../../workflows/create-product';
 
 // type PostAdminCreateBrandType = z.infer<typeof PostAdminCreateBrand>;
 

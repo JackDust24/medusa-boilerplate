@@ -7,3 +7,5 @@
 /hawk-store-storefront/.yarn
 /hawk-store-storefront/.yarn
 /hawk-store-storefront/out/
+
+/fake-erp/node_modules

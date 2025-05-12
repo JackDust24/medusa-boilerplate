@@ -33,5 +33,12 @@ export default defineMiddlewares({
         }),
       ],
     },
+    {
+      matcher: '/erptest/products',
+      method: 'POST',
+      additionalDataValidator: {
+        brand_id: z.string().optional(),
+      },
+    },
   ],
 });
