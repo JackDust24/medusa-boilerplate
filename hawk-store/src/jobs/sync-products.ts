@@ -16,5 +16,5 @@ export default async function syncProductsJob(container: MedusaContainer) {
 
 export const config = {
   name: 'daily-product-sync',
-  schedule: '* * * * *', // Every day at midnight
+  schedule: '0 0 * * *', // Every day at midnight
 };

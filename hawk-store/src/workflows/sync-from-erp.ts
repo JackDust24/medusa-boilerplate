@@ -21,7 +21,6 @@ const getProductsFromErpStep = createStep(
 
 export const syncFromErpWorkflow = createWorkflow('sync-from-erp', () => {
   const erpProducts = getProductsFromErpStep();
-  console.log('ERP Products:', erpProducts);
 
   const productsToCreate = transform(
     {
@@ -29,12 +28,6 @@ export const syncFromErpWorkflow = createWorkflow('sync-from-erp', () => {
     },
     (data) => {
       return data.erpProducts.map((erpProduct) => {
-        console.log('Transforming ERP Product:', erpProduct);
-        console.log(
-          'Transforming ERP Product Cariants:',
-          erpProduct.variants[0]
-        );
-
         return {
           title: erpProduct.title,
           external_id: erpProduct.id,

@@ -52,7 +52,7 @@ export const POST = async (
 
     res.status(200).json({ status: 'success', product: createdProduct });
   } catch (e) {
-    console.error('ERP SYNC ERROR', e);
+    console.error('ERP TEST SYNC ERROR', e);
     res.status(500).json({ status: 'error', message: e.message });
   }
 };
