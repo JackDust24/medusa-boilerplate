@@ -40,7 +40,6 @@ export const POST = async (
   ];
 
   try {
-    console.log('ERP SYNC PRODUCT', req.body);
     const createdProduct = await productService.createProducts(products);
 
     if (additional_data?.brand_id) {
@@ -49,7 +48,6 @@ export const POST = async (
         createdProduct,
         additional_data.brand_id
       );
-      console.log('LINKED PRODUCTS TO BRAND', links);
     }
 
     res.status(200).json({ status: 'success', product: createdProduct });

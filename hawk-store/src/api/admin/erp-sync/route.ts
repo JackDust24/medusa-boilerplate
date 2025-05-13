@@ -2,7 +2,6 @@ import { MedusaRequest, MedusaResponse } from '@medusajs/framework/http';
 import { syncFromErpWorkflow } from '../../../workflows/sync-from-erp';
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-  console.log('Triggering ERP sync...', req.scope);
   try {
     const result = await syncFromErpWorkflow.run({
       container: req.scope,

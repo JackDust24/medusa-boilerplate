@@ -6,7 +6,5 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
 
   const brands = await brandService.listBrands();
 
-  console.log('brands -> ', brands);
-
   res.json({ brands });
 };
