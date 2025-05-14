@@ -13,11 +13,13 @@ export default function CategoryTemplate({
   category,
   sortBy,
   page,
+  query,
   countryCode,
 }: {
   category: HttpTypes.StoreProductCategory
   sortBy?: SortOptions
   page?: string
+  query?: string
   countryCode: string
 }) {
   const pageNumber = page ? parseInt(page) : 1
@@ -87,6 +89,7 @@ export default function CategoryTemplate({
           <PaginatedProducts
             sortBy={sort}
             page={pageNumber}
+            query={query}
             categoryId={category.id}
             countryCode={countryCode}
           />

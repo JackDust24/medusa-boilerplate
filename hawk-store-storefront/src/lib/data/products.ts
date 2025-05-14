@@ -7,6 +7,11 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { getRegion, retrieveRegion } from "./regions"
 
+// 🧩 Extend Medusa's HttpTypes to support 'q' as a valid param
+type ExtendedFindParams = HttpTypes.FindParams & {
+  q?: string
+}
+
 export const listProducts = async ({
   pageParam = 1,
   queryParams,
@@ -14,13 +19,13 @@ export const listProducts = async ({
   regionId,
 }: {
   pageParam?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: ExtendedFindParams & HttpTypes.StoreProductParams
   countryCode?: string
   regionId?: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: ExtendedFindParams & HttpTypes.StoreProductParams
 }> => {
   if (!countryCode && !regionId) {
     throw new Error("Country code or region ID is required")
@@ -28,7 +33,7 @@ export const listProducts = async ({
 
   const limit = queryParams?.limit || 12
   const _pageParam = Math.max(pageParam, 1)
-  const offset = (_pageParam === 1) ? 0 : (_pageParam - 1) * limit;
+  const offset = _pageParam === 1 ? 0 : (_pageParam - 1) * limit
 
   let region: HttpTypes.StoreRegion | undefined | null
 
@@ -94,24 +99,26 @@ export const listProductsWithSort = async ({
   queryParams,
   sortBy = "created_at",
   countryCode,
+  searchTerm = "",
 }: {
   page?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: ExtendedFindParams & HttpTypes.StoreProductParams
   sortBy?: SortOptions
   countryCode: string
+  searchTerm?: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: ExtendedFindParams & HttpTypes.StoreProductParams
 }> => {
   const limit = queryParams?.limit || 12
-
   const {
     response: { products, count },
   } = await listProducts({
     pageParam: 0,
     queryParams: {
       ...queryParams,
+      q: searchTerm,
       limit: 100,
     },
     countryCode,

@@ -9,11 +9,13 @@ import PaginatedProducts from "./paginated-products"
 const StoreTemplate = ({
   sortBy,
   page,
+  query,
   countryCode,
 }: {
   sortBy?: SortOptions
   page?: string
   countryCode: string
+  query?: string
 }) => {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
@@ -32,6 +34,7 @@ const StoreTemplate = ({
           <PaginatedProducts
             sortBy={sort}
             page={pageNumber}
+            query={query}
             countryCode={countryCode}
           />
         </Suspense>
