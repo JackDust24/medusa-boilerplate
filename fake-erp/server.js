@@ -14,6 +14,10 @@ app.get('/products', (req, res) => {
   res.json({ products: fakeProducts });
 });
 
+app.get('/get-token', (req, res) => {
+  res.json({ token: 'fake-token-123' });
+});
+
 app.post('/products', (req, res) => {
   console.log('🔄 ERP POST /products triggered:', req.body);
   const product = req.body;
@@ -40,6 +44,8 @@ worker.on('error', (err) => {
 worker.on('exit', (code) => {
   console.log('👋 Worker exited with code', code);
 });
+
+app.use(express.static('public'));
 
 app.listen(4001, () => {
   console.log('🚀 Fake ERP server running on http://localhost:4001');
